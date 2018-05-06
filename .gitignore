@@ -1,6 +1,6 @@
-.in
-.out
-.zip
-.exe
+*.in
+*.out
+*.zip
+*.exe
 
 /aoapc-bac2nd-master
