@@ -1,0 +1,57 @@
+#binary decision tree
+#memorize
+
+def maxVal(w,v,i,aw):
+    global numCalls
+    #print('called with:',i,aw)
+    numCalls+=1
+    if i ==0:
+        if w[i]<=aw:
+            return v[i]
+        else:
+            return 0
+    without_i = maxVal(w,v,i-1,aw)
+    if w[i]>aw:
+        return without_i
+    else:with_i = maxVal(w,v,i-1,aw-w[i])+v[i]
+    return max(with_i,without_i)
+
+def fastMaxVal(w,v,i,aw,m):
+    global numCalls
+    numCalls +=1
+    try:
+        return m[(i,aw)]
+    except KeyError:
+        if i ==0:
+            if w[i]<=aw:
+                m[(i,aw)]=v[i]
+                return v[i]
+            else:
+                m[(i,aw)]=0
+                return 0
+        without_i = fastMaxVal(w,v,i-1,aw,m)
+        if w[i]>aw:
+            m[(i,aw)]=without_i
+            return without_i
+        else:with_i = fastMaxVal(w,v,i-1,aw-w[i],m)+v[i]
+        ans = max(with_i,without_i)
+        m[(i,aw)]=ans
+        return ans
+
+def maxVal0(w,v,i,aw):
+    m = {}
+    return fastMaxVal(w,v,i,aw,m)
+
+#def test():
+numCalls = 0
+v = [15,10,9,5]
+w = [1,5,3,4]
+v2 = v[:]
+v2+=v2
+w2 = w+w
+v3 = v2+v2
+w3 = w2+w2
+#return w2
+maxValue = maxVal0(w2,v2,len(v2)-1,8)
+#maxValue = max_val(w2,v2,len(v2)-1,8)
+print(maxValue,numCalls)
