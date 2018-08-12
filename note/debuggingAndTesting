@@ -1,0 +1,34 @@
+debugging:
+reading
+print statement
+be systematic
+
+reduce search space
+localite the source of problem
+
+Goal:to be bug free
+
+the samplest input provoke the bug
+fint he part the code is wrong (binary search)
+
+wrongs:
+	order
+	spelling
+	initialization
+	object vs value
+	aliasing(别名) deep vs shillow copy
+
+systematic!!!!!!!!!!
+mistake model
+
+recommadation:
+	keep record what you have tried
+	reconsider assumption
+	debug conde,not comments
+	get help, explain
+	walk away
+	code should not always grow
+	make sure you can revert-save old version
+
+
+haste makes waste——欲速则不达
