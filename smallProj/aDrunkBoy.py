@@ -63,48 +63,50 @@ class Drunk(object):
         for i in range(time):
             pt = CompassPt(random.choice(CompassPt.possible))
             field.move(pt,1)
-            
+#perform one trial            
 def performTrial(time,f):
     start = f.getLoc()
     distances = [0.0]
     for t in range(1,time+1):
-        f.getDrunk().move(f)
+        f.getDrunk().move(f)#if move the ()
         newLoc = f.getLoc()
         distance = newLoc.getDist(start)
         distances.append(distance)
     return distances
 
-drunk = Drunk("Homer Simpson")
-for i in range (3):
-    f = Field(drunk,Location(0,0))
-    distance = performTrial(500,f)
-    pylab.plot(distance)
-pylab.title("Homer \'s Random Wald")
-pylab.xlabel('Time')
-pylab.ylabel('Distance from Origin')
+#drunk = Drunk("Homer Simpson")
+#for i in range (3):
+#    f = Field(drunk,Location(0,0))
+#    distance = performTrial(5000,f)
+#    pylab.plot(distance)
+#pylab.title("Homer \'s Random Wald")
+#pylab.xlabel('Time')
+#pylab.ylabel('Distance from Origin')
 
-#def performSim(time,numTrials):
-#    distLists = []
-#    for trial in range(numTrials):
-#        d = Drunk('Drunk'+str(trial))
-#        f = Field(d,Location(0,0))
-#        distances = performTrial(time,f)
-#        distLists.appenddistaances
-#    return distLists
-#
-#def ansQuest(maxTime,numTrials):
-#    means = []
-#    distLists = performSim(maxTime,numTials)
-#    for t in range(maxTime+1):
-#        tot = 0.0
-#        for distL in distLists:
-#            tot += distL[t]
-#        means.append(tot/len(distL))
-#    pylab.figure()
-#    pylab.plot(means)
-#    pylab.ylabel('distance')
-#    pylab.xlabel('time')
-#    pylab.title('Average Distance vs. Time ('+str(len(distLists))+'trials)')
-#
-#ansQuest(500,300)
-#pylab.show()
+#perform serval trials
+def performSim(time,numTrials):
+    distLists = []
+    for trial in range(numTrials):
+        d = Drunk('Drunk'+str(trial))
+        f = Field(d,Location(0,0))
+        distances = performTrial(time,f)
+        distLists.append(distances)
+    return distLists
+
+def ansQuest(maxTime,numTrials):
+    means = []
+    distLists = performSim(maxTime,numTrials)
+    for t in range(maxTime+1):
+        tot = 0.0
+        for distL in distLists:
+            tot += distL[t]
+        means.append(tot/len(distLists))
+        #print(len(distLists)," ")
+    pylab.figure()
+    pylab.plot(means)
+    pylab.ylabel('distance')
+    pylab.xlabel('time')
+    pylab.title('Average Distance vs. Time ('+str(len(distLists))+'trials)')
+
+ansQuest(500,300   )
+pylab.show()
