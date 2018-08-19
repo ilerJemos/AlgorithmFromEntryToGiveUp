@@ -35,3 +35,26 @@ def fib22(n):
         memo_1 = memo_0
         memo_0 = memo
     return memo
+
+#矩阵快速幂
+#logn
+def fib_matrix_multiply(a,b):
+    temp = [[0,0],[0,0]]
+    for i in range (len(a)):
+        for j in range(len(b)):
+            for k in range(len(temp)):
+                temp[i][j]+=a[i][k]*b[k][j]
+    return temp
+def fib_matrix_fib(n):
+    n=n-1
+    base = [[1,1],[1,0]]
+    res =[[1,1],[1,0]]
+    surplus = [[1,0],[0,0]]
+    while n!=0:
+        if n&1:
+            res = fib_matrix_multiply(base,res)
+        base = fib_matrix_multiply(base,base)
+        print("n:",n,"res: ",res,"base:",base)
+        n>>=1
+    res = fib_matrix_multiply(surplus,res)
+    return res[0][0]

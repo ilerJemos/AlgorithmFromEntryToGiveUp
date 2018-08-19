@@ -1,7 +1,7 @@
 #n
 def exp1(a,b):
     ans = 1
-    while(b>0):
+    while(b):
         ans *=a
         b-=1
     return ans
@@ -28,3 +28,26 @@ def exp4(a,b):
         base *=base
         b>>=1
     return ans
+
+#矩阵快速幂
+#logn
+def fib_matrix_multiply(a,b):
+    temp = [[0,0],[0,0]]
+    for i in range (len(a)):
+        for j in range(len(b)):
+            for k in range(len(temp)):
+                temp[i][j]+=a[i][k]*b[k][j]
+    return temp
+def fib_matrix_fib(n):
+    n=n-1
+    base = [[1,1],[1,0]]
+    res =[[1,1],[1,0]]
+    surplus = [[1,0],[0,0]]
+    while n!=0:
+        if n&1:
+            res = fib_matrix_multiply(base,res)
+        base = fib_matrix_multiply(base,base)
+        print("n:",n,"res: ",res,"base:",base)
+        n>>=1
+    res = fib_matrix_multiply(surplus,res)
+    return res[0][0]
