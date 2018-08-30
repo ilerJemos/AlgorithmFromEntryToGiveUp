@@ -16,6 +16,7 @@ def maxVal(w,v,i,aw):
     else:with_i = maxVal(w,v,i-1,aw-w[i])+v[i]
     return max(with_i,without_i)
 
+#O(ns) s:size of ofknapsack
 def fastMaxVal(w,v,i,aw,m):
     global numCalls
     numCalls +=1

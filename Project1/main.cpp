@@ -4,6 +4,7 @@
 void printL(int*, int);
 
 
+
 int main() {
 	int L[] = {10, 3, 4, 5, 6, 2, 6, 3, 2, 6, 1,8,7};
 	int len = sizeof(L) / sizeof(L[0]);
@@ -22,10 +23,27 @@ int main() {
 	//sampleInsertSort(L,len);
 	//cout << "sampleInsertSort" << endl;
 	//printL(L, len);
-	
-	shellSort(L, len);
+
+	//insertSort(L, len);
+	//cout << "insertSort" << endl;
+	//printL(L, len);
+
+	/*shellSort(L, len);
 	cout << "shellSort" << endl;
+	printL(L, len);*/
+
+	/*mergeSort(L, len);
+	cout << "mergeSort" << endl;
+	printL(L, len);*/
+
+	/*quicksort(L, len);
+	cout << "quicksort" << endl;
+	printL(L, len);*/
+
+	heapSort(L, len);
+	cout << "heapSort" << endl;
 	printL(L, len);
+
 	return 0;
 }
 void printL(int* L, int len) {

@@ -1,6 +1,6 @@
 #include"Sort.h"
 
-void swap(int, int);
+void swap(int*,int, int);
 int max(int, int);
 int min(int, int);
 
@@ -58,22 +58,137 @@ void sampleInsertSort(int*L, int len) {
 		L[preIndex + 1] = current;
 	}
 }
+void insertSort(int* L, int len) {
+	for (int i = 1; i < len; i++) {
+		for (int j = i; L[j] < L[j - 1]&&j>0; j--)
+			swap(L, j, j - 1);
+	}
+}
 
 //希尔排序/缩小增量排序
+//简单插入排序改进
+//nlogn**2
 void shellSort(int* L, int len) {
-	int increment=len;
-	int temp,j;
-	do {
-		increment= increment / 3 + 1;
-		for (int i = increment ; i < len-1; i++) {
-			if (L[i] < L[i - increment]) {
-				temp = L[i];
-				for (j = i - increment; j > 0 && temp < L[j]; j -= increment) {
-					L[j + increment] = L[j];
-				}
-				L[j + increment] = temp;
-			}
-		}
+	int increment = 1;
+	while (increment < len / 3)			//动态定义间隔序列
+		increment = increment * 3 + 1;
 
-	} while (increment > 1);
+	while (increment >= 1) {
+		//简单插入排序
+		for (int i = increment; i < len; i++) {
+			for (int j = i; j >= increment && L[j] < L[j - increment]; j -= increment)
+				swap(L, j, j - increment);
+		}
+		increment = increment / 3;
+	}
+}
+
+//归并排序
+//分治策略 Divide and Conquer
+//二路归并
+//稳定
+//nlogn
+void merge(int* L,int left,int m,int right) {
+	int tr[100];
+
+	int i, j,k;
+	for (k = 0, i = left, j = m + 1; i <= m&&j <= right;k++) {
+		if (L[i] <= L[j]) {
+			tr[k] = L[i];
+			i++;
+		}
+		else {
+			tr[k] = L[j];
+			j++;
+		}
+	}
+	//k++;
+	while (i != m+1) {
+		tr[k] = L[i];
+		i++;
+		k++;
+	}
+	while (j != right+1) {
+		tr[k] = L[j];
+		j++;
+		k++;
+	}
+	for (int i = 0; i <= right - left; i++)
+		L[left+i] = tr[i];
+}
+void MSort(int* L,int left,int right) {
+	if (left == right)
+		return;
+	int m = (left + right) / 2;
+	MSort(L, left, m);
+	MSort(L, m + 1, right);
+	merge(L, left, m, right);
+}
+void mergeSort(int* L, int len) {
+	MSort(L,0,len-1);
+}
+
+//快速排序
+//nlogn
+int partition(int* L,int left,int right) {
+	int key = L[left];
+	while (left < right) {
+		while (left<right&&L[right]>=key)
+			right--;
+		swap(L, left, right);
+		while (left < right&&L[left] <= key)
+			left++;
+		swap(L, left, right);
+	}
+	return left;
+}
+void qSort(int* L,int left,int right) {
+	int pivot;
+	if (left < right) {
+		pivot = partition(L,left,right);
+		qSort(L,left,pivot-1);
+		qSort(L, pivot + 1,right);
+	}
+}
+void quickSort(int* L, int len) {
+	qSort(L, 0, len - 1);
+}
+
+//堆排序
+void heapAdjust(int* L,int s,int m) {
+	int temp;
+	temp = L[s];
+	for (int j = s * 2; j <= m; j *= 2) {
+		if (j < m&&L[j] < L[j + 1])
+			j++;
+		if (temp >= L[j])
+			break;
+		L[s] = L[j];
+		s = j;
+	}
+	L[s] = temp;
+}
+void heapAjd(int* L, int m,int len) {
+	int left = 2 * m +1;
+	int right = 2 * m + 2;
+	int large = m;
+	if (left<len&&L[left]>L[large])
+		large = left;
+	if (right<len&&L[right]>L[large])
+		large = right;
+	if (large != m) {
+		swap(L, m, large);
+		heapAjd(L, large, len);
+	}
+}
+void heapSort(int* L,int len) {
+	int i;  
+	for (i = len / 2; i >= 0; i--)
+		heapAjd(L, i, len-1);
+		//heapAdjust(L, i, len - 1);
+	for (i = len - 1; i >= 0; i--) {
+		swap(L, 0, i);
+		//heapAdjust(L, 0, i - 1);
+		heapAjd(L, i, --len);
+	}
 }
