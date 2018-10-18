@@ -1,0 +1,12 @@
+{
+    "C_Cpp.errorSquiggles": "Disabled",
+    "files.associations": {
+        "*.cpp": "cpp",
+        "*.h": "h",
+        "*.c": "c",
+        "*.tcc": "cpp",
+        "vector": "cpp",
+        "system_error": "cpp",
+        "iostream": "cpp"
+    }
+}
