@@ -39,7 +39,7 @@ void sampleInsertSort(int *L, int len)
     for (int i = 1; i < len; i++)
     {
         int j = i;
-        while (L[j] < L(j - 1) && j > 0)
+        while (L[j] < L[j - 1] && j > 0)
         {
             swap(L, j - 1, j);
             j--;
@@ -51,7 +51,7 @@ void sampleInsertSort(int *L, int len)
 void shellSort(int *L, int len)
 {
     int incre = 1;
-    while (intcre < len / 3)
+    while (incre < len / 3)
     {
         incre = 3 * incre + 1;
     }
@@ -72,21 +72,12 @@ void shellSort(int *L, int len)
 
 //归并排序
 //分治 Divide and Conque
-void mSort(int *L, int left, int rigt)
-{
-    if (left >= right)
-        return;
-    int m = (left + right) / 2;
-    mSort(L, left, m);
-    mSort(L, m + 1, right);
-    merge(L, left, m, right);
-}
 void merge(int *L, int left, int m, int right)
 {
     int *tr;
     tr = (int *)malloc((right - left + 1) * sizeof(int));
     int i = 0, j = 0;
-    k = 0;
+    int k = 0;
     for (; i < m && j < right; k++)
     {
         if (L[i] <= L[j])
@@ -117,9 +108,20 @@ void merge(int *L, int left, int m, int right)
         L[i] = tr[i - left];
     }
 }
+
+void mSort(int *L, int left, int right)
+{
+    if (left >= right)
+        return;
+    int m = (left + right) / 2;
+    mSort(L, left, m);
+    mSort(L, m + 1, right);
+    merge(L, left, m, right);
+}
+
 void mergeSort(int *L, int len)
 {
-    mSort(L, 0, len - 1)
+    mSort(L, 0, len - 1);
 }
 
 //快速排序
@@ -144,8 +146,8 @@ void qSort(int *L, int left, int right)
     {
         int pivot;
         pivot = partition(L,left,right);
-        qSort(int *L, int left, int pivot - 1);
-        qSort(int *L, int pivot + 1, int right);
+        qSort(L, left, pivot - 1);
+        qSort(L, pivot + 1, right);
     }
 }
 void quickSort(int *L, int len)
