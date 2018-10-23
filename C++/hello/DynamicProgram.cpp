@@ -128,9 +128,10 @@ int crossRiver(int n, int *T)
 }
 //区间模型
 //给定一个长度为n（n <= 1000）的字符串A，求插入最少多少个字符使得它变成一个回文串
+//不易使用自底而上
 inline int dfs(string s, int d[][5], int i, int j)
 {
-    if (d[i][j]!=0)
+    if (d[i][j] != 0)
         return d[i][j];
     if (i == j)
         return d[i][j] = 0;
@@ -144,8 +145,8 @@ inline int dfs(string s, int d[][5], int i, int j)
 int palindromeCreate(string s)
 {
     int n = s.length() - 1;
-    int d[n][5]={0};
-    n=dfs(s, d, 0, n);
+    int d[n][5] = {0};
+    n = dfs(s, d, 0, n);
     return n;
 }
 //背包模型
@@ -175,3 +176,110 @@ int LIS(int *L, int n)
     return len;
 }
 //nlogn
+
+//数字三角形 从顶部到底部的最短路径
+// [2],
+// [3,4],
+// [6,5,7],
+// [4,1,8,3]
+//自下而上
+int minTriangle(int **tr, int n)
+{
+    if (n <= 1)
+        return n;
+    int d[n][n] = {0};
+    for (int i = 0; i < n; i++)
+        d[n - 1][i] = tr[n - 1][i];
+
+    for (int i = n - 2; i >= 0; i--)
+    {
+        for (int j = 0; j <= i; j++)
+        {
+            d[i][j] = tr[i][j] + min(d[i + 1][j], d[i + 1][j + 1]);
+        }
+    }
+    return d[0][0];
+}
+//自上而下 递归
+int minTriangleDFS(int **tr, int i, int j, int n, int **d)
+{
+    if (d[i][j] != 0)
+        return d[i][j];
+
+    if (i == n - 1)
+        return d[i][j] = tr[i][j];
+
+    d[i][j] = min(minTriangleDFS(tr, i + 1, j, n, d), minTriangleDFS(tr, i + 1, j + 1, n, d)) + tr[i][j];
+    return d[i][j];
+}
+int minTriangle2(int **tr, int n)
+{
+    int **d = new int *[n];
+    for (int i = 0; i < n; i++)
+        d[i] = new int[i + 1]();
+    return minTriangleDFS(tr, 0, 0, n, d);
+}
+//package problem v,A{]}
+int package1(int v, int A[], int n)
+{
+    int d[n][v];
+    for (int i = 0; i < v; i++)
+    {
+        d[0][i] = 0;
+    }
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if (j >= A[i])
+            {
+                d[i][j] = max(d[i - 1][j], d[i - 1][j - A[i]]);
+            }
+            else
+            {
+                d[i][j] = d[i - 1][j];
+            }
+        }
+    }
+    return d[n][v];
+}
+
+//N皇后问题
+int nQueenDFS(int n, int *d)
+{
+}
+int nQueen(int n)
+{
+    int d[n];
+}
+
+//编辑距离
+int editDistance(string s1, string s2)
+{
+    //if(s1.empty()()||s2.empty()) return 0;
+
+    int m = s1.length() + 1;
+    int n = s2.length() + 1;
+
+    int d[m][n];
+
+    for (int i = 0; i < m; i++)
+    {
+        d[i][0] = i;
+    }
+    for (int j = 0; j < n; j++)
+        d[0][j] = j;
+
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if (s1[i] == s2[j])
+                d[i][j] = d[i - 1][j - 1];
+            else
+                d[i][j] = min(d[i - 1][j], min(d[i][j - 1], d[i - 1][j - 1])) + 1;
+        }
+    }
+
+    return d[m-1][n-1];
+}
