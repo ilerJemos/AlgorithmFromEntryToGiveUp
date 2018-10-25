@@ -256,7 +256,8 @@ int nQueen(int n)
 //编辑距离
 int editDistance(string s1, string s2)
 {
-    //if(s1.empty()()||s2.empty()) return 0;
+    if (s1.empty() || s2.empty())
+        return 0;
 
     int m = s1.length() + 1;
     int n = s2.length() + 1;
@@ -281,5 +282,30 @@ int editDistance(string s1, string s2)
         }
     }
 
-    return d[m-1][n-1];
+    return d[m - 1][n - 1];
+}
+
+int editDistanceArray(string s1, string s2)
+{
+    int m = s1.length() + 1;
+    int n = s2.length() + 1;
+    int d[n];
+    int pre, tmp;
+    for (int j = 0; j < n; j++)
+        d[j] = j;
+    for (int i = 1; i < m; i++)
+    {
+
+        pre = d[0];
+        d[0] = i;
+        for (int j = 1; j < n; j++)
+        {
+            if (s1[i - 1] == s2[j - 1])
+                d[j] = pre;
+            else
+                d[j] = min(pre, min(d[j], d[j - 1])) + 1;
+            pre = tmp;
+        }
+    }
+    return d[n - 1];
 }
