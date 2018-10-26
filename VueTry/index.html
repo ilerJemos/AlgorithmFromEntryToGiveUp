@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>lin sun's JavaScript temlate</title>
+	<script src="myjs.js"></script>
+</head>
+
+<body>
+
+	<script>document.write("<p>1.直接写入HTML输出流<p>")</script>
+
+	<button type="button" onclick="alert('欢迎')">2.按钮点击事件</button>
+
+	<p id="demo" onclick="myFunction()">
+		3.JavaScript 能改变 HTML 元素的内容。
+	</p>
+	<script>
+		function myFunction() {
+			x = document.getElementById("demo");  // 找到元素
+			x.innerHTML = "Hello JavaScript!";    // 改变内容
+		}
+	</script>
+
+	<img src="resources/img/kebi.jpg" id="mypic" width="400" height="300" onmousewheel="imgChange()">
+	<script>
+		function imgChange(){
+			d = document.getElementById('mypic')
+			if(d.src.match("kebi")){
+				d.src = "resources/img/large.jpg"
+			}
+			else{
+				d.src = "resources/img/kebi.jpg"
+			}
+		}
+	</script>
+	<br>
+	<!-- 改变元素属性 -->
+	<script>
+		x = document.getElementById("demo")
+		x.style.color = '#ff0000'
+	</script>
+
+	<input type="text" id="number-input" placeholder="请输入数字">
+	<script>
+		function numberTest() {
+			var x = document.getElementById("number-input").value
+			if (x == "" || isNaN(x)) {
+				alert('please input numbers!')
+			}
+			else {
+				alert(x)
+			}
+			
+		}
+	</script>
+	<button onclick="numberTest()">测试输入</button>
+
+	<p onclick="outputTest()">out put test</p>
+
+	<button onclick="this.innerHTML='youclickme'" onmouseover="this.style.color"="#ff0000" onmouseout="this.style.color"="#0000ff">多种事件监控</button>
+	<div id ='div1'>
+		Hello
+		<br>
+	</div>
+	<script>
+		var para = document.createElement('p')
+		var node = document.createTextNode("this is a new paragraph")
+		para.appendChild(node)
+		var element = document.getElementById("div1")
+		element.appendChild(para)
+		para.addEventListener('click',delectEl)
+		function delectEl(){
+			para.removeChild(node)
+		}
+	</script>
+
+</body>
+
+</html>

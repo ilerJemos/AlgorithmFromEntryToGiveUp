@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Vue 测试</title>
+    <script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{ message }}</p>
+    </div>
+
+    <div id="app2">
+        <!-- 指令 v-bind ：将message绑定到title上 -->
+        <span v-bind:title="message">
+            鼠标悬停几秒查看动态绑定的信息
+        </span>
+    </div>
+    <div id="app3">
+        <p v-if='seen'>现在你看到我了</p>
+    </div>
+    <div id='app4'>
+        <ol>
+            <li v-for='todo in todos'>
+                {{todo.text}}
+            </li>
+        </ol>
+    </div>
+    <div id='app5'>
+        {{message}}
+        <button v-on:click='reverseMessage'>逆转消息</button>
+    </div>
+    <div id="app6">
+        <p>{{message}}<p>
+                <input v-model='message'>
+    </div>
+    <div id="app7">
+        <ol>
+            <todo-item 
+            v-for="item in groceryList" 
+            v-bind:todo='item' 
+            v-bind:key="item.id">
+            </todo-item>
+        </ol>
+    </div>
+    <div id = "app8">
+        <p>original message:{{message}}</p>
+        <p>computed reversed message:"{{reverseMessage}}"</p>
+    </div>
+    <div id = 'app9'>
+        <p>
+            ask a yes/no question:
+            <input v-model='question'>
+        </p>
+        <p>{{answer}}</p>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+<script>
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue.js!'
+        }
+    })
+    var app2 = new Vue({
+        el: '#app2',
+        data: {
+            message: '页面加载于' + new Date().toLocaleDateString()
+        }
+    })
+    var app3 = new Vue({
+        el: '#app3',
+        data: {
+            seen: true
+        }
+    })
+    var app4 = new Vue({
+        el: '#app4',
+        data: {
+            todos: [
+                { text: "学习Javascript" },
+                { text: "learn english" },
+                { text: "nothing to study" }
+            ]
+        }
+    })
+    var app5 = new Vue({
+        el: '#app5',
+        data: {
+            message: "hello vue.js!"
+        },
+        methods: {
+            reverseMessage: function () {
+                this.message = "hellll"
+            }
+        }
+    })
+    var app6 = new Vue({
+        el: '#app6',
+        data: {
+            message: 'hello vue'
+        }
+    })
+
+    Vue.component('todo-item', {
+        props: ['todo'],
+        template: '<li>{{todo.text}}</li>'
+    })
+    var app7 = new Vue({
+        el: '#app7',
+        data: {
+            groceryList: [
+                { id: 0, text: 'apple' },
+                { id: 2, text: 'pen' },
+                { id: 3, text: 'applepencil' }
+            ]
+        }
+    })
+    // 计算属性
+    var app8 = new Vue({
+        el:'#app8',
+        data:{
+            message:'hello vue hens'
+        },
+        computed:{
+            reverseMessage:function(){
+                // return 'reverse'
+                return this.message.split('').reverse().join('')
+            }
+        }
+    })
+    //watch
+    var app9 = new Vue({
+        el:'#app9',
+        data:{
+            question:'',
+            answer:'i cannot give you an answer until you ask a question!'
+        },
+        watch:{
+            question:function(newQuestion,oldQuestion){
+                this.answer='waiting for you to stop typing。。。'
+                this.debouncedGetAnswer()
+            }
+        },
+        created:function(){
+            this.debouncedGetAnswer=_.debounce(this.getAnswer,500)
+        },
+            methods:{
+                getAnswer:function(){
+                    if(this.question.indexOf('?')===-1){
+                        this.answer='question usualy contail a quesion mark.:-)'
+                        return
+                    }
+                    this.answer='thinking...'
+                    //return  
+                    var vm = this
+                    axios.get('https://yesno.wtf/qpi').then(function(response){
+                        vm.answer=_.capitalize(response.data.answer)
+                    })
+                    .catch(function (error){
+                        vm.answer='error! could not reach the api'+error
+                    })
+                }
+            }
+    })
+
+    
+</script>
+
+</html>
