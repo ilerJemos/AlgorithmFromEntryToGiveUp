@@ -1,0 +1,215 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>iframe 内联框架</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
+    <!-- <script src="main.js"></script> -->
+</head>
+
+<body>
+    <div style="text-align:center">
+        <button onclick="playPause()">播放/暂停</button>
+        <button onclick="makeBig()">放大</button>
+        <button onclick="makeSmall()">缩小</button>
+        <button onclick="makeNormal()">普通</button>
+        <br>
+        <video id="video1" width="420" controls>
+            <source src="resources/video/lin.mp4" type="video/mp4">
+            你的浏览器不支持 video 标签。
+        </video>
+        <script>
+            var myVideo = document.getElementById("video1");
+
+            function playPause() {
+                if (myVideo.paused)
+                    myVideo.play();
+                else
+                    myVideo.pause();
+            }
+            function makeBig() {
+                myVideo.width = 560;
+            }
+            function makeSmall() {
+                myVideo.width = 320;
+            }
+            function makeNormal() {
+                myVideo.width = 420;
+            } 
+        </script>
+    </div>
+    <hr>
+    <canvas id="myCanvas" width="600" height="400" style="border:10px dotted #000000; background:#ddd">
+        <script>
+            var c = document.getElementById("myCanvas");
+            var ctx = c.getContext("2d");
+
+            var grd = ctx.createLinearGradient(0, 0, 200, 0);
+            grd.addColorStop(0, "red");
+            grd.addColorStop(1, "white");
+
+            ctx.fillStyle = grd;
+            ctx.fillRect(0, 0, 150, 75);
+            ctx.fillStyle = "#000000"
+            ctx.moveTo(0, 0);
+            ctx.lineTo(200, 100);
+            ctx.stroke();
+        </script>
+    </canvas>
+    <hr>
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="190">
+        <polygon points="100,10 40,180 190,60 10,60 160,180" style="fill:lime;stroke:purple;stroke-width:5;fill-rule:evenodd;">
+    </svg>
+    <hr>
+    <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <mrow>
+            <msup>
+                <mi>a</mi>
+                <mn>2</mn>
+            </msup>
+            <mo>+</mo>
+            <msup>
+                <mi>b</mi>
+                <mn>2</mn>
+            </msup>
+            <mo>=</mo>
+            <msup>
+                <mi>c</mi>
+                <mn>2</mn>
+            </msup>
+        </mrow>
+    </math>
+    <math xmlns="http://www.w3.org/1998/Math/MathML">
+
+        <mrow>
+            <mi>A</mi>
+            <mo>=</mo>
+            <mfenced open="[" close="]">
+                <mtable>
+                    <mtr>
+                        <mtd>
+                            <mi>x</mi>
+                        </mtd>
+                        <mtd>
+                            <mi>y</mi>
+                        </mtd>
+                    </mtr>
+
+                    <mtr>
+                        <mtd>
+                            <mi>z</mi>
+                        </mtd>
+                        <mtd>
+                            <mi>w</mi>
+                        </mtd>
+                    </mtr>
+                </mtable>
+            </mfenced>
+        </mrow>
+    </math>
+    <hr>
+    <em>可拖放脚本</em>
+    <script>
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            ev.dataTransfer.setData("Text", ev.target.id);
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("Text");
+            ev.target.appendChild(document.getElementById(data));
+        }
+    </script>
+    <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <p>位置1</p>
+        <img src="resources/img/jib.jpg" draggable="true" ondragstart="drag(event)" id="drag1" width="100" height="66">
+    </div>
+    <hr>
+    <div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <p>位置2</p>
+    </div>
+    <hr>
+    <p id="demo">点击按钮获取您当前坐标（可能需要比较长的时间获取）：</p>
+    <div id="mapholder"></div>
+    <button onclick="getLocation()">点我</button>
+    <script>
+        var x = document.getElementById("demo");
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+                //持续返回用户位置
+                // navigator.geolocation.watchPosition(showPosition);
+                //停止 watch
+                // navigator.geolocation.clearWatch()
+            }
+            else { x.innerHTML = "该浏览器不支持获取地理位置。"; }
+        }
+        function showPosition(position) {
+            x.innerHTML = "纬度: " + position.coords.latitude +
+                "<br>经度: " + position.coords.longitude;
+            //在地图中显示
+            var latlon = position.coords.latitude + "," + position.coords.longitude;
+            var img_url = "http://maps.googleapis.com/maps/api/staticmap?center="
+                + latlon + "&zoom=14&size=400x300&sensor=false";
+            document.getElementById("mapholder").innerHTML = "<img src='" + img_url + "'>";
+        }
+        function showError(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    x.innerHTML = "用户拒绝对获取地理位置的请求。"
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    x.innerHTML = "位置信息是不可用的。"
+                    break;
+                case error.TIMEOUT:
+                    x.innerHTML = "请求用户地理位置超时。"
+                    break;
+                case error.UNKNOWN_ERROR:
+                    x.innerHTML = "未知错误。"
+                    break;
+            }
+        }
+    </script>
+    <hr>
+    <form action="">
+        颜色<input type="color" name="favcolor"><br>
+        日期<input type="date" name="birthday"><br>
+        utc时间<input type="datetime" name="whattimenow"><br>
+        本地时间<input type="datetime-local" name="localtime"><br>
+        邮件<input type="email" name="myemail"><br>
+        月份<input type="month" name="mymonth"><br>
+        数字<input type="number" name="quantity" min="0" max="15" step="2" value="10"><br>
+        滑动条<input type="range" name="point" min="1" max="10"> <br>
+        搜索框:<input type="search" name="google"><br>
+        电话:<input type="tel" name="tel"><br>
+        时间:<input type="time" name="time"><br>
+        url地址:<input type="url" name="url"><br>
+        week: <input type="week" name="week"><br>
+        <hr>
+        <input list="browsers">
+        <datalist id="browsers">
+            <option value="Internet Explorer">
+            <option value="Firefox">
+            <option value="Chrome">
+            <option value="Opera">
+            <option value="Safari">
+        </datalist>
+        <input type="submit" value="Submit">
+    </form>
+    <hr>
+    <form action="/statics/demosource/demo-form.php" method="get">
+        用户名: <input type="text" name="usr_name">
+        加密: <keygen name="security">
+        <input type="submit">
+      </form>
+    <hr>
+</body>
+
+</html>
