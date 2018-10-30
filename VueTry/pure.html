@@ -8,13 +8,18 @@
     <title>pure html</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <style>
-        #header{
-            background-image: "url(https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-708150.jpg)";
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js">
+
+        <style>
+            #header{
+                background - image: "url(https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-708150.jpg)";
             background-attachment:scroll;
         }
     </style>
-    <script src="main.js"></script>
+            <script src="main.js"></script>
     <!-- 默认链接地址 -->
     <!-- <base href="http://www.baidu.com"> -->
     <!-- 搜索引擎关键字 -->
@@ -62,6 +67,25 @@
             <q>定义短的引用</q><br>
             <cite>工作的名称 定义引用，引证</cite><br>
             <dfn>定义一个定义项目</dfn><br>
+            <hr>
+            <p>将鼠标移动到这些字上改变鼠标样式cursor.</p>
+            <span style="cursor:auto">auto</span><br>
+            <span style="cursor:crosshair">crosshair</span><br>
+            <span style="cursor:default">default</span><br>
+            <span style="cursor:e-resize">e-resize</span><br>
+            <span style="cursor:help">help</span><br>
+            <span style="cursor:move">move</span><br>
+            <span style="cursor:n-resize">n-resize</span><br>
+            <span style="cursor:ne-resize">ne-resize</span><br>
+            <span style="cursor:nw-resize">nw-resize</span><br>
+            <span style="cursor:pointer">pointer</span><br>
+            <span style="cursor:progress">progress</span><br>
+            <span style="cursor:s-resize">s-resize</span><br>
+            <span style="cursor:se-resize">se-resize</span><br>
+            <span style="cursor:sw-resize">sw-resize</span><br>
+            <span style="cursor:text">text</span><br>
+            <span style="cursor:w-resize">w-resize</span><br>
+            <span style="cursor:wait">wait</span><br>
         </div>
         <div id="content" style="width: 1100px;float: left;background-color: blanchedalmond">
             <!-- 默认在原窗口打开 -->
@@ -156,9 +180,36 @@
                     <embed src="movie.swf" width="320" height="240">
                 </object>
             </video>
-            <embed src="http://player.youku.com/player.php/sid/XMzI2NTc4NTMy/v.swf" width="480" height="400" type="application/x-shockwave-flash"> </embed>
+            <embed src="http://player.youku.com/player.php/sid/XMzI2NTc4NTMy/v.swf" width="480" height="400" type="application/x-shockwave-flash">
+            </embed>
             <hr>
             <hr><br><br>
+            <div class="dropdown">
+                <span>鼠标移动到我这！</span>
+                <div class="dropdown-content">
+                    <p>W3Cschool教程</p>
+                    <p>www.w3cschool.cn</p>
+                </div>
+            </div>
+            <hr>
+            <div class="dropdown">
+                <button class="dropbtn">下拉菜单</button>
+                <div class="dropdown-content">
+                    <a href="http://www.w3cschool.cn">W3Cschool教程 1</a>
+                    <a href="http://www.w3cschool.cn">W3Cschool教程 2</a>
+                    <a href="http://www.w3cschool.cn">W3Cschool教程 3</a>
+                </div>
+            </div>
+            <hr>
+            <p>移动鼠标到图片上显示下拉内容。</p>
+
+            <div class="dropdown">
+                <img src="resources/img/death.png" alt="Trolltunga Norway" width="100" height="50">
+                <div class="dropdown-content">
+                    <img src="resources/img/death.png" alt="Trolltunga Norway" width="400" height="200">
+                    <div class="desc">学技术，从W3Cschool开始！</div>
+                </div>
+            </div>
         </div>
         <div id="footer" style="background-color:darkorchid;clear: both;text-align: center">
             <a href="#totop">返回顶部</a>

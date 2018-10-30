@@ -10,8 +10,115 @@ p{
     text-align: center;
 }
 #menu{
-    background-image: url(resources/img/jib.jpg);
+    background-image: url(resources/img/kebi.jpg);
     background-attachment: scroll;
     background-repeat: no-repeat;
     background-position: 0% 50%;
 }
+a {text-decoration:none;
+}
+a:hover {text-decoration:underline;}   /* mouse over link */
+a:active {text-decoration:underline;}  /* selected link */
+/* css 组合选择
+后代选取器(以空格分隔)
+子元素选择器(以大于号分隔）
+相邻兄弟选择器（以加号分隔）
+普通兄弟选择器（以波浪号分隔） */
+/* 伪元素
+p:first-letter
+{
+color:#ff0000;
+font-size:xx-large;
+}
+p:first-line 
+{
+color:#0000ff;
+font-variant:small-caps;
+} */
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+/*
+下拉菜单
+*/
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+/*
+*/
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.desc {
+    padding: 15px;
+    text-align: center;
+}
+
+@media only screen and (max-width: 500px) {
+    body {
+        background-color:lightblue;
+    }
