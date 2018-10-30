@@ -204,12 +204,77 @@
         <input type="submit" value="Submit">
     </form>
     <hr>
-    <form action="/statics/demosource/demo-form.php" method="get">
-        用户名: <input type="text" name="usr_name">
+    <form action="/statics/demosource/demo-form.php" method="get" autocomplete="on" novalidate>
+        用户名: <input type="text" name="usr_name" autofocus>
         加密: <keygen name="security">
         <input type="submit">
-      </form>
+    </form>
     <hr>
+    <form action="" oninput="x.value=parseInt(a.value)+parseInt(b.value)">
+        0<input type="range" name="" id="a" value="50" min="0" max="100">100
+        +<input type="number" name="" id="b" value="50">
+        = <output name="x" for="a+b"></output>
+    </form>
+    <hr>
+    <!-- 保存数据：localStorage.setItem(key,value);
+读取数据：localStorage.getItem(key);
+删除单个数据：localStorage.removeItem(key);
+删除所有数据：localStorage.clear();
+得到某个索引的key：localStorage.key(index); -->
+    <p id="result"></p>
+    <script>
+        if (typeof (Storage) !== "undefined") {
+            //   localStorage.sitename="W3Cschool在线教程";
+            localStorage.setItem("sitename", "linlinlin");
+            document.getElementById("result").innerHTML = "网站名：" + localStorage.sitename;
+        }
+        else {
+            document.getElementById("result").innerHTML = "对不起，您的浏览器不支持 web 存储。";
+        }
+    </script>
+    <hr>
+    <p>计数： <output id="result"></output></p>
+    <button onclick="startWorker()">开始工作</button>
+    <button onclick="stopWorker()">停止工作</button>
+
+    <p><strong>注意：</strong> Internet Explorer 9 及更早 IE 版本浏览器不支持 Web Workers.</p>
+
+    <script>
+        var w;
+        function startWorker() {
+            if (typeof (Worker) !== "undefined") {
+                if (typeof (w) == "undefined") {
+                    w = new Worker("demo_workers.js");
+                }
+                w.onmessage = function (event) {
+                    document.getElementById("result").innerHTML = event.data;
+                };
+            } else {
+                document.getElementById("result").innerHTML = "抱歉，你的浏览器不支持 Web Workers...";
+            }
+        }
+        function stopWorker() {
+            w.terminate();
+            w = undefined;
+        }
+    </script>
+
+    <hr>
+    <script>
+        if (typeof (EventSource) !== "undefined") {
+            // 浏览器支持 Server-Sent
+            // 一些代码.....
+            var source = new EventSource("demo_sse.php");
+            source.onmessage = function (event) {
+                document.getElementById("result").innerHTML += event.data + "<br>";
+            };
+        }
+        else {
+            // 浏览器不支持 Server-Sent..
+        }
+    </script>
+    <hr>
+
 </body>
 
 </html>

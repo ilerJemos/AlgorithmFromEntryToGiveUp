@@ -1,0 +1,17 @@
+p{
+    color:red;
+    text-align: center;
+}
+#menu{
+    color: chartreuse;
+    text-align: center;
+}
+.mtitle{
+    text-align: center;
+}
+#menu{
+    background-image: url(resources/img/jib.jpg);
+    background-attachment: scroll;
+    background-repeat: no-repeat;
+    background-position: 0% 50%;
+}
