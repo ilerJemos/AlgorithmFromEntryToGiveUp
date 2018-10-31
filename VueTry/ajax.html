@@ -1,0 +1,127 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AjaxText</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <!-- <script src="main.js"></script> -->
+    <script src="//libs.baidu.com/jquery/1.10.2/jquery.min.js""></script>
+</head>
+
+<body>
+
+    <div id=" myDiv">
+        <h2>使用 AJAX 修改该文本内容</h2>
+    </div>
+    <button type="button" onclick="loadXMLDoc()">修改内容</button>
+    <hr>
+    <p>通过表单提交序列化</p>
+    <span style="font-size:18px;">
+        <script> $.ajax({
+                type: "POST",
+                url: your - url,
+                data: $('#yourformid').serialize(),
+                async: false,
+                error: function (request) {
+                    alert("Connection error");
+                },
+                success: function (data) {
+                    //接收后台返回的结果
+                }
+            });</script></span>
+    <hr>
+    <p>通过iframe提交</p>
+    <span style="font-size:18px;"> // 提交表单
+        <script>
+            var obj = document.getElementById("xx_iframe").contentWindow;
+            obj.$("#yourform").form("submit", {
+                success: function (data) {
+                    //对结果处理
+                }
+            });</script></span>
+    <hr>
+    <h2>四种常用的ajax提交方式</h2>
+    <p>$.ajax()返回其创建的 XMLHttpRequest 对象。</p>
+    <script>
+        $.ajax({
+            type: "post",
+            dataType: "html",
+            url: '/Resources/GetList.ashx',
+            data: dataurl,
+            success: function (data) {
+                if (data != "") {
+                    $("#pager").pager({ pagenumber: pagenumber, pagecount: data.split("$")[1], buttonClickCallback: PageClick });
+                    $("#anhtml").html(data.split("$")[0]);
+                }
+            }
+        });
+    </script>
+    <hr>
+    <p>通过远程 HTTP GET 请求载入信息</p>
+    <script>$.get("test.cgi", { name: "John", time: "2pm" },
+            function (data) {
+                alert("Data Loaded: " + data);
+            });</script>
+    <hr>
+    <p>3. 通过远程 HTTP POST 请求载入信息。</p>
+    <script>
+        $.post("/Resources/addfriend.ashx",
+         { "fid": fids, "fname": fnames, "tuid": tuids, "tuname": tunames }, 
+         function (data) {
+            if (data == "ok") {
+                alert("添加成功！");
+            }
+        })</script>
+        <hr>
+        <script>
+        $(document).ready(function(){
+            //jQuery代码
+        })
+        $(function(){
+
+        })
+        </script>
+
+    <hr>
+    <p>通过 HTTP GET 请求载入 JSON 数据。</p>
+    <script>
+        $.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?tags=cat&tagmode=any&format=json&jsoncallback=?",
+            function (data) {
+                $.each(data.items, function (i, item) {
+                    $("<img/>").attr("src", item.media.m).appendTo("#images");
+                    if (i == 3) return false;
+                });
+            });</script>
+    </body>
+    <script>
+        function loadXMLDoc() {
+            var xmlhttp;
+            if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            }
+            else {// code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    document.getElementById("myDiv").innerHTML = xmlhttp.responseText;
+                }
+            }
+            xmlhttp.open("GET", "/statics/demosource/ajax_info.txt", true);
+            xmlhttp.send();
+        }
+    </script>
+    <script>
+        $(function(){
+            $.load(URL,data,callback(responseText,statusTXT,xhr))
+            $.get(URL,callback(data,status ));
+            $.post(URL,data,callback(data,status)); 
+
+        })
+        
+    </script>
+
+</html>
