@@ -69,21 +69,21 @@
     <p>3. 通过远程 HTTP POST 请求载入信息。</p>
     <script>
         $.post("/Resources/addfriend.ashx",
-         { "fid": fids, "fname": fnames, "tuid": tuids, "tuname": tunames }, 
-         function (data) {
-            if (data == "ok") {
-                alert("添加成功！");
-            }
-        })</script>
-        <hr>
-        <script>
-        $(document).ready(function(){
+            { "fid": fids, "fname": fnames, "tuid": tuids, "tuname": tunames },
+            function (data) {
+                if (data == "ok") {
+                    alert("添加成功！");
+                }
+            })</script>
+    <hr>
+    <script>
+        $(document).ready(function () {
             //jQuery代码
         })
-        $(function(){
+        $(function () {
 
         })
-        </script>
+    </script>
 
     <hr>
     <p>通过 HTTP GET 请求载入 JSON 数据。</p>
@@ -115,13 +115,11 @@
         }
     </script>
     <script>
-        $(function(){
-            $.load(URL,data,callback(responseText,statusTXT,xhr))
-            $.get(URL,callback(data,status ));
-            $.post(URL,data,callback(data,status)); 
-
+        $(function () {
+            $.load(URL, data, callback(responseText, statusTXT, xhr))
+            $.get(URL, callback(data, status));
+            $.post(URL, data, callback(data, status));
         })
-        
     </script>
 
 </html>
