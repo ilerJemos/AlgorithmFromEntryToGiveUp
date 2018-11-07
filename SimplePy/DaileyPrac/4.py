@@ -1,4 +1,6 @@
+# 任一个英文的纯文本文件，统计其中的单词出现的个数。
 import string
+import re
 
 def return_order_key(record):
     return record[1]
@@ -40,17 +42,35 @@ def extend_word(text):
         for old_word in old2new.keys():
             _text = _text.replace(old_word, old2new[old_word])
         return _text
+def oldmethod():
+    with open('resource/doc/4_subtitle.txt','r')as file:
+        article = file.read()
+        #print("hi ",article)
+        no_pun_text =article
+        _punctuation =string.punctuation.replace('\'','')
+        for pun in _punctuation:
+            no_pun_text=no_pun_text.replace(pun,'')
+        #print('you',no_pun_text)
+        complete_text = no_pun_text
+        records = dict()
+        for word in complete_text.lower().split():
+            records[word]=records.get(word,0)+1
+        show_in_order(records)
 
-with open('resource/doc/4_subtitle.txt','r')as file:
-    article = file.read()
-    #print("hi ",article)
-    no_pun_text =article
-    _punctuation =string.punctuation.replace('\'','')
-    for pun in _punctuation:
-        no_pun_text=no_pun_text.replace(pun,'')
-    #print('you',no_pun_text)
-    complete_text = no_pun_text
-    records = dict()
-    for word in complete_text.lower().split():
-        records[word]=records.get(word,0)+1
-    show_in_order(records)
+def newmethod():
+    with open('resource/doc/4_subtitle.txt','r') as f:
+        text =str(f.read())
+    results = re.findall('[a-zA-Z0-9]+',text)
+    dic={}
+    for result in results:
+        dic[result]=dic.get(result,0)+1
+
+    print(sorted(dic.items(),key= lambda item:item[1],reverse=True))
+
+    # for item in dic:
+    #     print(item[0],item[1])
+
+
+if __name__=='__main__':
+    #oldmethod()
+    newmethod()

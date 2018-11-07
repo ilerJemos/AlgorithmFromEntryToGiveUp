@@ -1,4 +1,6 @@
+# 做为 Apple Store App 独立开发者，你要搞限时促销，为你的应用生成激活码（或者优惠券），使用 Python 如何生成 200 个激活码（或者优惠券）？
 import base64
+import uuid
 
 coupon ={
     'id':'1231',
@@ -29,5 +31,11 @@ def gen_all():
         parse_coupon(c_code)
         save_coupon(c_code)
 
+def produce():
+    with open('resource/doc/1.txt','w')as f:
+        for i in range(200):
+            keys= str(uuid.uuid4())
+            f.write(keys+'\n')
+
 if __name__=="__main__":
-    gen_all()
+    produce()

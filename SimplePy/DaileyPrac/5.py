@@ -1,3 +1,4 @@
+#你有一个目录，装了很多照片，把它们的尺寸变成都不大于 iPhone5 分辨率的大小。
 #iphone5 1136*640
 #iphone6 1334*750
 import os
@@ -22,3 +23,4 @@ for file in files:
     if file.split('.')[-1] in ext:
         #print(file)
         process_image(file)
+        break
