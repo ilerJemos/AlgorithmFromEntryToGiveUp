@@ -247,10 +247,12 @@ int package1(int v, int A[], int n)
 //N皇后问题
 int nQueenDFS(int n, int *d)
 {
+    return 0;
 }
 int nQueen(int n)
 {
     int d[n];
+    return 0;
 }
 
 //编辑距离
