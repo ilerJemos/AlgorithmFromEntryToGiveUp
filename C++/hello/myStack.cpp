@@ -20,7 +20,7 @@ class myStack
     {
         if (StackFull())
         {
-            cout << "stack is full";
+            //cout << "stack is full";
             return false;
         }
         else
@@ -61,7 +61,11 @@ class myStack
 //     //myStack<int>* m = new myStack<int>(10);
 //     myStack<int> m(10);
 //     m.Add(4);
-//     m.Delete(3);
-//     //std:vector<int> vec;
+//     m.Add(100);
+//     int b;
+//     m.Delete(b);
+//     std::cout<<b;
+//     m.Delete(b);
+//     std::cout<<b;
 //     return 0;
 // }

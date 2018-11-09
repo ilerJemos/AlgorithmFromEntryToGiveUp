@@ -9,7 +9,7 @@ bool myQueue<T>::Add(T item)
     }
     else
     {
-        queue[rear] = item;
+        queue[++rear] = item;
         return true;
     }
 }
@@ -25,13 +25,15 @@ bool myQueue<T>::Delete(T &item)
         return true;
     }
 }
-#include<iostream>
-int main(){
-    myQueue<int> a(10);
-    a.Add(10);
-    a.Add(100);
-    int b;
-    a.Delete(b);
-    std::cout<<b;
-    return 0;
-}
+// #include<iostream>
+// int main(){
+//     myQueue<int> a(10);
+//     a.Add(10);
+//     a.Add(100);
+//     int b;
+//     a.Delete(b);
+//     std::cout<<b;
+//     a.Delete(b);
+//     std::cout<<b;
+//     return 0;
+// }

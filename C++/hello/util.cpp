@@ -1,10 +1,20 @@
 template <class T>
-void swap(T *a, T *b)
+void mySwap(T &a, T &b)
 {
     T c;
     c = a;
     a = b;
     b = c;
+}
+
+template<class T>
+T myMax(T a, T b) {
+	return (a + b + abs(a - b)) / 2;
+}
+
+template<class T>
+T myMin(T a, T b) {
+	return(a + b - abs(a - b)) / 2;
 }
 
 // #include <iostream>

@@ -16,7 +16,7 @@ void swap(int* L,int a, int b) {
 	L[b] = temp;
 }
 
-//冒泡排序
+//???????
 void bubbleSort(int* L, int len) {
 	for (int j = 0; j < len - 1; j++) {
 		for (int i = 0; i < len - 1-j; i++) {
@@ -30,7 +30,7 @@ void bubbleSort(int* L, int len) {
 	}
 }
 
-//简单选择排序
+//?????????
 void sampleSelectSort(int *L, int len) {
 	int minIndex;
 	for (int i = 0; i < len - 1; i++) {
@@ -42,7 +42,7 @@ void sampleSelectSort(int *L, int len) {
 		swap(L,i, minIndex);
 	}
 }
-//简单插入排序
+//?????????
 void sampleInsertSort(int*L, int len) {
 	int preIndex, current;
 	for (int i = 1; i < len; i++) {
@@ -59,22 +59,22 @@ void sampleInsertSort(int*L, int len) {
 	}
 }
 void insertSort(int* L, int len) {
-	for (int i = 1; i < len; i++) {
-		for (int j = i; L[j] < L[j - 1]&&j>0; j--)
-			swap(L, j, j - 1);
-	}
+		for (int i = 1; i < len; i++) {
+			for (int j = i; L[j] < L[j - 1]&&j>0; j--)
+				swap(L, j, j - 1);
+		}
 }
 
-//希尔排序/缩小增量排序
-//简单插入排序改进
+//???????/??锟斤拷????????
+//???????????
 //nlogn**2
 void shellSort(int* L, int len) {
 	int increment = 1;
-	while (increment < len / 3)			//动态定义间隔序列
+	while (increment < len / 3)			//?????????????
 		increment = increment * 3 + 1;
 
 	while (increment >= 1) {
-		//简单插入排序
+		//?????????
 		for (int i = increment; i < len; i++) {
 			for (int j = i; j >= increment && L[j] < L[j - increment]; j -= increment)
 				swap(L, j, j - increment);
@@ -83,10 +83,10 @@ void shellSort(int* L, int len) {
 	}
 }
 
-//归并排序
-//分治策略 Divide and Conquer
-//二路归并
-//稳定
+//?锟斤拷????
+//???锟斤拷??? Divide and Conquer
+//??锟斤拷?锟斤拷
+//???
 //nlogn
 void merge(int* L,int left,int m,int right) {
 	int tr[100];
@@ -128,7 +128,7 @@ void mergeSort(int* L, int len) {
 	MSort(L,0,len-1);
 }
 
-//快速排序
+//????????
 //nlogn
 int partition(int* L,int left,int right) {
 	int key = L[left];
@@ -154,7 +154,7 @@ void quickSort(int* L, int len) {
 	qSort(L, 0, len - 1);
 }
 
-//堆排序
+//??????
 void heapAdjust(int* L,int s,int m) {
 	int temp;
 	temp = L[s];
