@@ -158,18 +158,18 @@ void quickSort(int *L, int len)
 //堆排序
 //生成大顶堆
 void heapAdj(int*L,int m,int len){
-//m为堆顶元素
-int left = 2*m+1;
-int right = left+1;
-int large=m;
-if(left<len&&L[left]>L[large])
-large=left;
-if(right<len&&L[right]>L[large])
-large=right;
-if(large!=m){
-    swap(L,m,large);
-    heapAdj(L,large,len);
-}
+    //m为堆顶元素
+    int left = 2*m+1;
+    int right = left+1;
+    int large=m;
+    if(left<len&&L[left]>L[large])
+        large=left;
+    if(right<len&&L[right]>L[large])
+        large=right;
+    if(large!=m){
+        swap(L,m,large);
+        heapAdj(L,large,len);
+    }
 }
 void heapSort(int *L, int len)
 {
